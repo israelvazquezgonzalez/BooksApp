@@ -1,0 +1,93 @@
+﻿@model List<BookModel>
+
+@foreach (var book in Model)
+{
+    string IiType = book.VolumeInfo.IndustryIdentifiers.First().Type;
+    string IiNumber = book.VolumeInfo.IndustryIdentifiers.First().Identifier;
+
+
+    <div class="row">
+        <div class="col-2">
+            <img src="@book.VolumeInfo.ImageLinks.Thumbnail" width="150" class="img-fluid" />
+        </div>
+        <div class="col-8">
+            <div>
+                <h3 class="mb-1">
+                    @book.VolumeInfo.Title<span class="raiting">
+                        @for (int i = 1, count = 6; i < count; i++)
+                        {
+                            <a href="#" class="star-link"><img src="@Html.Raw(i <= book.VolumeInfo.AverageRating ? "/lib/content/star-full.svg" : "/lib/content/star-empty.svg") " width="15" class="star align-baseline" data-id="@i" data-isbn="@IiNumber" /></a>
+                        }
+                    </span>
+                </h3>
+                <h4 class="text-black-50 mb-0">@book.VolumeInfo.Subtitle</h4>
+                <p class="mb-0">by <a href="/" class="btn btn-link p-0 align-baseline">@string.Join(", ",book.VolumeInfo.Authors)</a></p>
+                <small>@IiType: <span class="isbn-number">@IiNumber</span></small>
+            </div>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-outline-dark btn-block" type="button" data-bs-toggle="collapse" data-bs-target="#description-@IiNumber">More Details</button>
+            @*<button class="btn btn-outline-dark btn-block" type="button" data-bs-toggle="collapse" data-bs-target="#review-@IiNumber">editOrWriteReview</button>*@
+        </div>
+        <div class="col-12">
+            <div id="description-@IiNumber" class="collapse">
+                <table class="table table-sm mt-3">
+                    <thead>
+                        <tr>
+                            <th>
+                                Pages
+                            </th>
+                            <th>
+                                Website
+                            </th>
+                            <th>
+                                Publisher
+                            </th>
+                            <th>
+                                Published
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@book.VolumeInfo.PageCount</td>
+                            <td><a href="@book.VolumeInfo.PreviewLink" class="btn btn-link p-0 align-baseline">@book.VolumeInfo.PreviewLink</a></td>
+                            <td><a href="/" class="btn btn-link p-0 align-baseline">@book.VolumeInfo.Publisher</a></td>
+                            <td>@book.VolumeInfo.PublishedDate</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="card bg-light">
+                    <div class="card-text px-4 py-3">
+                        <p>@book.VolumeInfo.Description</p>
+                    </div>
+                </div>
+                @*       @if (book.VolumeInfo.Reviews != string.Empty)
+                    {
+                    <br />
+                    <div class="card bg-light">
+                    <div class="card-text px-4 py-3">
+                    <p>@book.VolumeInfo.Reviews</p>
+                    </div>
+                    </div>
+                    }*@
+            </div>
+        </div>
+        <div class="col-12">
+            <div id="review-@IiNumber" class="collapse">
+                <form class="write-review-form">
+                    <div class="form-group">
+                        <label>Write a Review</label>
+                        <textarea class="review-textarea form-control" name="reviewText">@book.VolumeInfo.AverageRating</textarea>
+                        <input type="hidden" name="isbn" value="@IiNumber" />
+                    </div>
+                    <button class="btn btn-secondary" type="submit">Submit Review</button>
+                    <small class="text-danger error-review-empty errors">Search field cannot be empty</small>
+                </form>
+            </div>
+        </div>
+    </div>
+    <hr class="my-3" />
+}
+
+

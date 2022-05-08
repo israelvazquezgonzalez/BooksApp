@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="px-4 py-5 my-5 text-center">
+
+    <form id="search-form" class="col-6 mx-auto form-inline">
+        <div class="mb-3">
+
+            <img class="d-block mx-auto" src="/lib/content/home-book.svg" alt="" width="144" height="114">
+
+            <h1 class="display-5 mb-0 fw-bold">Search a book</h1>
+
+            <p class="lead mb-4">A quick way to finding the book you are looking for.</p>
+
+            <div class="input-group">
+
+                <input id="search-input" type="text" class="form-control form-control-lg"
+                       placeholder="Search by Title, Author or Description" name="query"
+                       aria-label="Search book" aria-describedby="search">
+
+                <div class="input-group-append">
+                    <button class="btn btn-primary btn-lg br" type="submit" id="search-button">Find your book</button>
+                </div>
+
+                <div class="invalid-feedback">
+                    Search field cannot be empty
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
