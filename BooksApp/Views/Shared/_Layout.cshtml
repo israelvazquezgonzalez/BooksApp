@@ -9,15 +9,27 @@
     <link rel="stylesheet" href="~/BooksApp.styles.css" asp-append-version="true" />
 </head>
 <body>
+    <div class="overlay"></div>
+    <div id="loader">
+        <img src="/lib/content/book-gif.gif"/>
+        <p>Loading...</p>
+        <div class="circle"></div>
+    </div>
     <div class="container-full">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer bg-secondary text-light">
         <div class="container">
-            &copy; 2022 - BooksApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            <i>Book Search App by Israel Vazquez-Gonzalez</i>
+            <div class="row">
+                <div class="col">
+                    &copy; 2022 - Books Search App
+                </div>
+                <div class="col text-end">
+                    <i>Book Search App by Israel Vazquez-Gonzalez</i>
+                </div>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -9,11 +9,11 @@ namespace BooksApp.Controllers
 
         public IActionResult Search(string query)
         {
-            VolumenModel model = new();
+            VolumeModel model = new();
 
-            if (string.IsNullOrEmpty(query))
+            if (!string.IsNullOrEmpty(query))
             {
-                model = VolumenAccess.Search(query).Result;
+                model = VolumeAccess.SearchVolume(query).Result;
             }
 
             return View("/Views/Search/SearchResults.cshtml", model);

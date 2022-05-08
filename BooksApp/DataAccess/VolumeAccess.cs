@@ -3,12 +3,12 @@ using System.Text.Json;
 
 namespace BooksApp.DataAccess
 {
-    public class VolumenAccess
+    public class VolumeAccess
     {
         static readonly string Url = "https://www.googleapis.com/books/v1/volumes?q=";
         static readonly string ApiKey = "AIzaSyA7aG25WobVtWe3OgQz-sl8W53zHpk1uqw";
 
-        public async static Task<VolumenModel> Search(string query)
+        public async static Task<VolumeModel> SearchVolume(string query)
         {
             using (var client = new HttpClient())
             {
@@ -19,7 +19,7 @@ namespace BooksApp.DataAccess
                     JsonSerializerOptions serializerOptions = GetSerializerOptions();
 
                     var reponse = await result.Content.ReadAsStringAsync();
-                    var model = JsonSerializer.Deserialize<VolumenModel>(reponse, serializerOptions);
+                    var model = JsonSerializer.Deserialize<VolumeModel>(reponse, serializerOptions);
 
                     return model;
 

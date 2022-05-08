@@ -10,7 +10,30 @@ $(document).on("submit", "#search-form", (e) => {
 
     const $form = $(e.target);
     const query = $form.serialize();
+    const url = `Search/Search?${query}`
     const $searchString = $form.find("input");
+
+    const closeLoader = () => {
+        $("#loader").hide();
+        $(".overlay").hide();
+    };
+
+    const openLoader = () => {
+        $("#loader").show();
+        $(".overlay").show();
+    };
+
+    const success = (response) => {
+
+        $("#books-details").html(response);
+        $form.find("input").val("");
+        $("#search-results").show();
+        $("#search-results span").text(searchString)
+    };
+
+    const errorHandler = (result, status, xhr) => {
+        $("#no-results Message").html("Result: " + status + " " + result + " " + xhr.status + " " + xhr.statusText)
+    }
 
     if ($searchString.val() === "") {
         $searchString.addClass("is-invalid")
@@ -23,16 +46,8 @@ $(document).on("submit", "#search-form", (e) => {
 
     $form.addClass("was-validated");
 
-    const url = `/Search?${query}`
-    const successFunction = (data) => {
+    openLoader();
 
-        $("#books-details").html(data);
-        $form.find("input").val("");
-        $("#search-results").show();
-        $("#search-results span").text(searchString)
-
-    };
-
-    $.get(url, successFunction);
+    $.get(url, success).fail(errorHandler).done(closeLoader());
 
 })
