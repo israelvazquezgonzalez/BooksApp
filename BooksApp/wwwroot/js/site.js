@@ -6,8 +6,7 @@ $(document).on("submit", "#search-form", (e) => {
 
     const $form = $(e.target);
     const searchString = $form.serialize();
-    const searchQuery = buildQuery(searchString);
-    const url = `/Search/Search?${searchQuery}`
+    const url = `/Search/Search?${searchString}`
     const $search = $form.find("input");
 
     if ($search.val() === "") {
@@ -72,8 +71,7 @@ $(document).on("click", ".author-link", function (e) {
 
     const $link = $(e.target);
     const searchString = $link.data("author");
-    const searchQuery = buildQuery(searchString);
-    const url = `/Search/Search?inauthor:${searchQuery}`
+    const url = `/Search/Search?query=${searchString}`
 
     const onSucess = (data) => $("#search-results").html(data);
 
@@ -86,16 +84,6 @@ $(document).on("click", ".author-link", function (e) {
  
     getRequest(url, onSucess, onFailure, hideLoader)
 })
-
-function buildQuery(value) {
-
-    if (value.indexOf(" ") > -1) 
-        return value.split(" ").join("+");
-    else if (value.indexOf("%20") > -1)
-        return value.split("%20").join("+");
-    else
-        return value;
-}
 
 function getRequest(url, onSucess, onFailure, onComplete) {
 
@@ -113,3 +101,4 @@ function getRequest(url, onSucess, onFailure, onComplete) {
         failure: onFailure
     }).done(onComplete);
 }
+

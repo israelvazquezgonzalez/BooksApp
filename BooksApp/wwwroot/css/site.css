@@ -25,8 +25,8 @@ html {
     background-image: linear-gradient(to top, #c1e6ee, #e0e9eb70);
 }
 
-body{
-    background:none;
+body {
+    background: none;
 }
 
 #no-results-container {
@@ -112,6 +112,16 @@ body{
     z-index: 98;
 }
 
-    #search-hero.display-fixed p, #search-hero.display-fixed img, #search-hero.display-fixed h1{
-        display:none !important;
+    #search-hero.display-fixed p, #search-hero.display-fixed img, #search-hero.display-fixed h1 {
+        display: none !important;
     }
+
+
+@media only screen and (max-width: 575px) {
+    .raiting {
+        display: block
+    }
+    .details{
+        margin-top:15px;
+    }
+}

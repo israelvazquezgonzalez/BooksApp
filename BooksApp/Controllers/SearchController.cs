@@ -18,7 +18,6 @@ namespace BooksApp.Controllers
 
             return PartialView("~/Views/Shared/_SearchResults.cshtml", model);
         }
-        
     }
 
 }
