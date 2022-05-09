@@ -1,0 +1,131 @@
+﻿@model BooksApp.Models.VolumeModel
+
+@{
+    ViewData["Title"] = "SearchResults";
+}
+
+@if (Model.TotalItems <= 0)
+{
+    <div id="no-results-container">
+        <div class="row">
+            <div class="col text-center">
+                <div class="message-container">
+                    <div class="no-results-message">Sorry there are no books matching those keywords. Please try something else.</div>
+                </div>
+                <img src="/lib/content/bookshelf-empty.svg" />
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <h2 class="text-center">Search Results</h2>
+
+    <div id="search-items">
+        <div class="row">
+            <div class="col-10 mx-auto">
+                <p class="mb-0">
+                    <span class="fw-bold">@Model.TotalItems</span> book(s) matching the query "<span class="fw-bold query-string"></span>"
+                </p>
+
+                <hr />
+
+                @foreach (var book in Model.Items)
+                {
+                    string IiType = book.VolumeInfo.IndustryIdentifiers.First().Type;
+                    string IiNumber = book.VolumeInfo.IndustryIdentifiers.First().Identifier;
+
+                    bool isDescriptionLong = string.IsNullOrEmpty(@book.VolumeInfo.Description) ? false :
+                    @book.VolumeInfo.Description.Length > 250 ? true : false;
+
+                    string description = isDescriptionLong
+                    ? @book.VolumeInfo.Description.Substring(0, 250) + "..."
+                    : @book.VolumeInfo.Description;
+
+                    <div class="row bg-white border rounded py-3 mb-3 shadow-sm">
+                        <div class="col-3 text-center">
+                            <img class="img-thumbnail shadow" alt="Cover of @book.VolumeInfo.Title"
+                         src="@book.VolumeInfo.ImageLinks.Thumbnail" width="150" />
+                        </div>
+                        <div class="col-9">
+                            <div>
+                                <h3 class="mb-1">
+                                    @book.VolumeInfo.Title<span class="raiting">
+
+                                        @for (int i = 1, count = 6; i < count; i++)
+                                        {
+                                            <img src="@Html.Raw(i <= book.VolumeInfo.AverageRating ? "/lib/content/star-full.svg" : "/lib/content/star-empty.svg")"
+                                     width="20" class="star align-baseline" data-id="@i" data-isbn="@IiNumber" />
+                                        }
+
+                                    </span>
+                                </h3>
+                                <h4 class="text-black-50 mb-0">@book.VolumeInfo.Subtitle</h4>
+
+                                <p>
+                                    by
+                                    @foreach (string author in book.VolumeInfo.Authors)
+                                    {
+                                        <a href="/" class="btn btn-link p-0 align-baseline author-link" data-author="@author" title="Seach @author's books">@author</a>
+                                    }
+                                </p>
+
+                                <ul>
+                                    <li>
+                                        <strong>@IiType:</strong> <span class="isbn-number">@IiNumber</span>
+                                    </li>
+                                    <li>
+                                        <strong>Pages:</strong> @book.VolumeInfo.PageCount
+                                    </li>
+                                    <li>
+                                        <strong>Preview book:</strong> <a href="@book.VolumeInfo.PreviewLink"
+                                                                  class="btn btn-link p-0 align-baseline"
+                                                                  target="_blank">@book.VolumeInfo.Title</a>
+                                    </li>
+                                    <li>
+                                        <strong>Publisher:</strong> <a href="/"
+                                                               class="btn btn-link p-0 align-baseline">@book.VolumeInfo.Publisher</a>
+                                    </li>
+                                    <li>
+                                        <strong>Published:</strong> @book.VolumeInfo.PublishedDate
+                                    </li>
+                                </ul>
+                                <p>
+                                    <strong>Description:</strong> <span id="description-@IiNumber">@description</span>
+                                </p>
+                                @if (isDescriptionLong)
+                                {
+                                    <div class="text-end">
+                                        <button type="button" data-description-long="@book.VolumeInfo.Description"
+                                    data-description-short="@description"
+                                    data-description-target="#description-@IiNumber"
+                                    class="btn btn-link show-more-button">
+                                            Show more
+                                        </button>
+                                    </div>
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">Previous</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    </div>
+}
+

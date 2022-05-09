@@ -21,9 +21,17 @@ body {
 /*Custom CSS
 -------------------------------------------------- */
 
+html {
+    background-image: linear-gradient(to top, #c1e6ee, #e0e9eb70);
+}
+
+body{
+    background:none;
+}
+
 #no-results-container {
     background: #C8CCC1;
-    height: 70vh;
+    height: 100vh;
     position: relative;
 }
 
@@ -38,20 +46,21 @@ body {
     border-bottom-left-radius: 0
 }
 
-.bubble-container {
+.message-container {
     display: inline-block;
     position: absolute;
-    right: 10%;
+    left: 10%;
+    top: 40%;
 }
 
-.bubble {
+.no-results-message {
     display: inline-block;
     width: 300px;
     padding: 25px 15px;
     border-radius: 50px;
     position: relative;
     margin: 0;
-    font-size: 20px;
+    font-size: 33px;
     text-align: center;
 }
 
@@ -63,10 +72,6 @@ body {
     display: none;
     z-index: 99;
     top: 0;
-}
-
-.errors {
-    display: none;
 }
 
 #loader {
@@ -92,4 +97,21 @@ body {
         font-size: 28px;
         color: black;
         font-weight: 600;
+    }
+
+
+#search-hero.display-fixed {
+    margin-top: 0 !important;
+    margin-bottom: 20px !important;
+    padding: 25px 0 10px 0px !important;
+    background: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 98;
+}
+
+    #search-hero.display-fixed p, #search-hero.display-fixed img, #search-hero.display-fixed h1{
+        display:none !important;
     }

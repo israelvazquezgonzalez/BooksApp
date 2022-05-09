@@ -11,23 +11,23 @@
 <body>
     <div class="overlay"></div>
     <div id="loader">
-        <img src="/lib/content/book-gif.gif"/>
-        <p>Loading...</p>
+        <img src="/lib/content/book-gif.gif" />
+        <p class="ms-3">Loading...</p>
         <div class="circle"></div>
     </div>
     <div class="container-full">
-        <main role="main" class="pb-3">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
-    <footer class="border-top footer bg-secondary text-light">
+    <footer class="border-top footer bg-white">
         <div class="container">
             <div class="row">
                 <div class="col">
-                    &copy; 2022 - Books Search App
+                    <i><a href="mailto:isreal.vaz@gmail.com?subject=I saw your repo&body=Hello Israel" target="_blank" title="click to email">isreal.vaz@gmail.com</a></i>
                 </div>
                 <div class="col text-end">
-                    <i>Book Search App by Israel Vazquez-Gonzalez</i>
+                    <i>Book Search App by Israel Vazquez-Gonzalez &copy; 2022</i>
                 </div>
             </div>
         </div>

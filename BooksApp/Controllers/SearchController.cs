@@ -6,7 +6,7 @@ namespace BooksApp.Controllers
 {
     public class SearchController : Controller
     {
-
+        [HttpGet]
         public IActionResult Search(string query)
         {
             VolumeModel model = new();
@@ -16,7 +16,9 @@ namespace BooksApp.Controllers
                 model = VolumeAccess.SearchVolume(query).Result;
             }
 
-            return View("/Views/Search/SearchResults.cshtml", model);
+            return PartialView("~/Views/Shared/_SearchResults.cshtml", model);
         }
+        
     }
+
 }

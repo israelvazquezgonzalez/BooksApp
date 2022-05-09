@@ -1,8 +1,4 @@
-﻿using BooksApp.DataAccess;
-using BooksApp.Models;
-using LinqKit;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace BooksApp.Controllers
 {
@@ -15,4 +11,5 @@ namespace BooksApp.Controllers
         }
 
     }
+
 }
