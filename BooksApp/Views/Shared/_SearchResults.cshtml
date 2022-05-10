@@ -6,7 +6,7 @@
 
 @if (Model.TotalItems <= 0)
 {
-    <div id="no-results-container">
+    <div id="no-results-container" onload="scrollToNoResults()">
         <div class="row">
             <div class="col text-center">
                 <div class="message-container">

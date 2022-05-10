@@ -58,7 +58,7 @@ $(document).on("click", ".show-more-button", function (e) {
         $(target).html(contentLong);
     }
 
-    $button.toggleClass("show-less");
+    $button.toggleClass("show-less", 1000);
 
 })
 
@@ -129,3 +129,8 @@ function getRequest(url, onSucess, onFailure, onComplete) {
     }).done(onComplete);
 }
 
+function scrollToNoResults() {
+    $('html, body').animate({
+        scrollTop: $("#no-results-container").offset().top
+    }, 2000);
+}
