@@ -21,11 +21,8 @@ $(document).on("submit", "#search-form", (e) => {
     $form.addClass("was-validated");
 
     const onSucess = (data) => {
-
         $("#search-results").html(data);
         $(".query-string").html($search.val());
-        $("#search-hero").addClass("display-fixed shadow");
-
     }
 
     const onFailure = (data) => alert(data);
@@ -71,7 +68,7 @@ $(document).on("click", ".author-link", function (e) {
 
     const $link = $(e.target);
     const searchString = $link.data("author");
-    const url = `/Search/Search?query=${searchString}`
+    const url = `/Search/Search?query=inauthor:${searchString}`
 
     const onSucess = (data) => $("#search-results").html(data);
 
@@ -83,6 +80,36 @@ $(document).on("click", ".author-link", function (e) {
     }
  
     getRequest(url, onSucess, onFailure, hideLoader)
+})
+
+$(document).on("click", ".publisher-link", function (e) {
+
+    e.preventDefault();
+
+    const $link = $(e.target);
+    const searchString = $link.data("publisher");
+    const url = `/Search/Search?query=inpublisher:${searchString}`
+
+    const onSucess = (data) => $("#search-results").html(data);
+
+    const onFailure = (data) => alert(data);
+
+    const hideLoader = () => {
+        $("#loader").hide();
+        $(".overlay").hide();
+    }
+
+    getRequest(url, onSucess, onFailure, hideLoader)
+})
+
+$(window).on('scroll', function () {
+    if ($(window).scrollTop() > 321) {
+        $("#search-hero").addClass("display-fixed shadow border");
+        $("#search-results").css("margin-top", 521);
+    } else {
+        $("#search-hero").removeClass("display-fixed shadow border");
+        $("#search-results").css("margin-top", 0);
+    }
 })
 
 function getRequest(url, onSucess, onFailure, onComplete) {
